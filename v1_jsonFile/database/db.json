@@ -1,0 +1,84 @@
+{
+	"users": [
+		{
+			"id": "5524aa4e57fbf87437991f2c4888dd00af288b6d",
+			"login": "test",
+			"pass": "1234",
+			"tasks": []
+		},
+		{
+			"id": "d8b0442d648f1f658a84c64fe550c81f7a747748",
+			"login": "bogdan.grishin.2007@gmail.com",
+			"pass": "112233",
+			"tasks": [
+				{
+					"text": "Сьесть пиццу",
+					"id": "3256e45a610c7564a677",
+					"checked": true
+				},
+				{
+					"text": "Выгулять кота",
+					"id": "9e3c6cf350944b56a0fa",
+					"checked": false
+				},
+				{
+					"id": "fdd445116d9d12e8f30c",
+					"text": "Пойти в путишествие",
+					"checked": false
+				},
+				{
+					"text": "Любить java-script",
+					"id": "910b14b58a88421737f3",
+					"checked": true
+				},
+				{
+					"text": "Купить пентхаус",
+					"id": "a7c8486fb6dc2191904f",
+					"checked": true
+				},
+				{
+					"id": "65114fba6609c87b1540",
+					"text": "Поесть",
+					"checked": false
+				},
+				{
+					"text": "Попить",
+					"id": "794b52d23b9661e1156e",
+					"checked": true
+				},
+				{
+					"text": "Почилить",
+					"id": "9b6df8d49ddb6a4cdb61",
+					"checked": true
+				},
+				{
+					"id": "9befbcf43f1a1f92e8c4",
+					"text": "To do 2.5",
+					"checked": false
+				},
+				{
+					"text": "Testing",
+					"id": "ac0e16bbcc0665744b97",
+					"checked": false
+				},
+				{
+					"id": "bb2a6409c9de10ed5fac",
+					"text": "abcd",
+					"checked": false
+				}
+			]
+		},
+		{
+			"id": "4c7eee4c2acf12098ddeda56773a09b4c5433181",
+			"login": "Пес",
+			"pass": "1",
+			"tasks": []
+		},
+		{
+			"id": "3a23ad70bc24e302b0c0fdd29865fcc81f12089c",
+			"login": "iii",
+			"pass": "000000",
+			"tasks": []
+		}
+	]
+}

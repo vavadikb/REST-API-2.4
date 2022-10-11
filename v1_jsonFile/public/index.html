@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Задачник</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        h1{
+            font-size: 60px;
+            font-family: Arial;
+            font-weight: bold;
+            color: black;
+            margin-left: 30px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 5px solid #27ae60;
+            background: white;
+            align-items: center;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            color: rgba(0,0,0,.87);
+        }
+
+        button {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            background: none;
+            font-size: 100%;
+            vertical-align: baseline;
+            font-family: inherit;
+            font-weight: inherit;
+            color: inherit;
+            -webkit-appearance: none;
+            appearance: none;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: #f8f8f8;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-weight: 300;
+        }
+
+        :focus {
+            outline: 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .todoapp {
+            min-width: 150px;
+            max-width: 600px;
+            margin: 133px auto 0;
+        }
+
+        input {
+            position: relative;
+            margin: 0;
+            width: 100%;
+            font-family: inherit;
+            font-weight: inherit;
+            line-height: 1.4em;
+            color: inherit;
+            padding: 6px;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            border: 2px solid rgba(0,0,0,.08);
+            padding: 5px 10px;
+        }
+
+        h3 {
+            margin: 10px 0;
+        }
+
+        .new_todo_button{
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+            background-color:#27ae60;
+            text-align: center;
+            color: white;
+        }
+
+        main{
+            width: 772px;
+            margin: 35px auto;
+        }
+        .task{
+            display: flex;
+            flex-direction: row;
+            padding: 2px 5px;
+            border: 2px solid rgba(0,0,0,.08);
+            margin-top: 10px;
+        }
+        .taskCompleted .task_content {
+            color: #27ae60;
+            text-decoration: line-through;
+        }
+
+        button{
+            cursor: pointer;
+            padding-left: 3px;
+            padding-right: 3px;
+        }
+        .status h3{
+            padding: 16px;
+        }
+
+        .contentText{
+            display: flex;
+            flex-direction: row;
+        }
+        .User{
+            display: flex;
+            flex-direction: row;
+            padding-left: 85%;
+        }
+
+        .wrapper {
+            background: #fff;
+            position: relative;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
+            0 25px 50px 0 rgba(0, 0, 0, 0.1);
+            padding: 25px;
+        }
+        .login {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login button, .logout {
+            margin: 5px 10px;
+            padding: 5px 10px;
+            transition: background .1s,color .1s;
+        }
+        .login button:hover, .logout:hover {
+            background-color: rgba(0,0,0,.05);
+            transition: background .1s,color .1s;
+        }
+
+        .settings {
+            margin: 20px 0;
+        }
+        .settings label {
+            margin: 5px 0;
+            display: block;
+        }
+        .settings input {
+            width: 300px;
+        }
+
+        .settings button {
+            background: white;
+            margin: 2px;
+            padding: 2px 5px;
+            box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%), 0 25px 50px 0 rgb(0 0 0 / 10%);
+        }
+        .settings button.selected {
+            background: #27ae60;
+            color: white;
+        }
+        :focus {
+            outline: #27ae60 dashed 2px;
+        }
+        .edit-input {
+            border: none;
+            outline: #27ae60 dashed 2px;
+            width: auto;
+        }
+        button.primary {
+            background-color: #27ae60;
+            color: white;
+        }
+        button.primary:hover {
+            background-color: #295;
+            color: white;
+        }
+        .LoginInput {
+            max-width: 250px;
+        }
+        .LoginInput input{
+            margin-bottom: 16px;
+        }
+
+        hr {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <header class="header">
+        <h1 class="logo">Ш<span style="color: #27ae60">++</span></h1>
+    </header>
+    <main>
+        <div class="settings">
+            <h2>Настройки приложения:</h2>
+                <label>
+                    Api URL:
+                    <input type="text" v-model="apiURL">
+                </label>
+                <div>
+                    На каком языке бекенд?
+                    <button @click="backendLanguage='PHP'" :class="{'selected': backendLanguage === 'PHP'}">PHP</button>
+                    <button @click="backendLanguage='JS'"  :class="{'selected': backendLanguage === 'JS'}">JS</button>
+                </div>
+                <div>
+                    Версия АПИ
+                    <button @click="apiVersion='v1'" :class="{'selected': apiVersion === 'v1'}">v1</button>
+                    <button @click="apiVersion='v2'" :class="{'selected': apiVersion === 'v2'}">v2</button>
+                </div>
+                <div>
+                    <button @click="getTasks()" class="primary">Поехали</button>
+                </div>
+        </div>
+        <div class="wrapper login" v-if="step === 'login'">
+            <h2>Доступ к учетной записи</h2>
+                <div class="LoginInput">
+                    <input v-model="login" type="text" placeholder="yaropolk@example.com" autofocus required>
+                    <input v-model="pass" type="password" placeholder="******" autofocus required>
+                </div>
+                <div class="LoginButton">
+                    <button @click="register">Зарегистрироваться</button>
+                    <button @click="logIn" class="primary">Войти</button>
+                </div>
+        </div>
+        <div class="wrapper" v-else-if="step === 'items'">
+            <h3>Добавить новую задачу:</h3>
+            <label style="display: flex;">
+                <input @keyup.enter="addTask" class="new_todo" autofocus autocomplete="on" placeholder="выгулять кота соседа"
+                       type="text" v-model="new_task.text">
+                <span><button @click="addTask" class="button new_todo_button">Добавить</button></span>
+            </label>
+            <h3 class="status_title">{{'Активные задачи: ' + tasks.length}}</h3>
+            <task @task_del="deleteTask(task.id)"
+                  @task_edit="editTask(index)"
+                  @task_done="markAsDone(index, task.id)"
+                  @save="save(index, task.id)"
+                  @disable="disable(index)"
+                  :data="task"
+                  :index="index+1"
+                  v-for="(task, index) in tasks"
+                  :key="index"></task>
+
+            <hr>
+            <button @click="logout" class="logout">Выйти &#128682;</button>
+        </div>
+        <div class="wrapper" v-else-if="step === 'error'">
+            Произошла ошибка. Откройте консоль разработчика чтоб увидеть подробности.
+        </div>
+
+    </main>
+</div>
+<script>
+    Vue.component("task", {
+        props: ["data", "index"],
+        template: `
+    <div class="task" v-bind:class="{ taskCompleted: data.checked}" >
+        <div class="contentText">
+            <div>
+                <button @click="$emit('task_done')" class="task_done taskButton">
+                    <span v-if="!data.checked" style="color: rgba(0,0,0,.28);"> ☐ </span>
+                    <span v-else style="color: #27ae60"> ☑ </span>
+                </button>
+                <span class="task_content" v-if="!data.editable">
+                    {{index}}. {{data.text}}
+                </span>
+                <span v-else>
+                    {{index}}. <input @keyup.enter="$emit('save')" v-model="data.inputedit" autofocus class="edit-input"/>
+                </span>
+            </div>
+            <div class="button check" v-if="!data.editable">
+                <button @click="$emit('task_edit')" style="color: #eca81a;"> ✎️ </button>
+                <button @click="$emit('task_del')" style="color: #cd1537;"> ✕ </button>
+            </div>
+            <div v-else>
+                <button @click="$emit('save')"> 💾 </button>
+                <button @click="$emit('disable')"> ✕ </button>
+            </div>
+        </div>
+    </div>
+    `
+    });
+
+    let vue = new Vue({
+        el: '#app',
+        data: {
+            new_task: {
+                text: '',
+                editable: false,
+                checked: false
+            },
+            tasks: [
+            ],
+            login: '',
+            pass: '',
+            backendLanguage: 'JS',
+            apiURL: 'http://localhost:3000/api/',
+            apiVersion: 'v1',
+            step: ''
+        },
+        computed: {
+            backendSuffix() {
+                return this.backendLanguage === 'PHP' ? '.php' : '';
+            },
+        },
+        methods: {
+            getTasks: function () {
+                const route = this.apiVersion === 'v1' ? '/items' : '/router';
+                const qs = {action: this.apiVersion === 'v1' ? '' : 'getItems'};
+                fetch(this.apiURL + this.apiVersion + route + this.backendSuffix + '?' + new URLSearchParams(qs))
+                    .then(res => res.json())
+                    .then((response) => {
+                        if (response.error === 'forbidden') {
+                            this.step = 'login';
+                        } else {
+                            this.tasks = response.map((item) => {
+                                item.editable = false;
+                                return item;
+                            })
+                            this.step = 'items';
+                        }
+                    }).catch((error) => {
+                    this.step = 'error';
+                })
+            },
+            deleteTask: function (index) {
+                let request = JSON.stringify({ id: index, });
+                const route = this.apiVersion === 'v1' ? '/items' : '/router';
+                const qs = {action: this.apiVersion === 'v1' ? '' : 'deleteItem'};
+                fetch(this.apiURL + this.apiVersion + route + this.backendSuffix + '?' + new URLSearchParams(qs), {
+                    method: this.apiVersion === 'v1' ? 'DELETE' : 'POST',
+                    body: request,
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                }).then(res => res.json())
+                    .then((response) => {
+                        if (response.ok === true) {
+                            this.getTasks()
+                        } else {
+                            alert("Произошла ошибка. Посмотрите консоль разработчика чтоб увидеть подробности.")
+                        }
+                    });
+            },
+            addTask: function () {
+                if (this.new_task.text.trim() !== '') {
+                    let request = JSON.stringify({ text: this.new_task.text });
+                    const route = this.apiVersion === 'v1' ? '/items' : '/router';
+                    const qs = {action: this.apiVersion === 'v1' ? '' : 'createItem'};
+                    fetch(this.apiURL + this.apiVersion + route + this.backendSuffix + '?' + new URLSearchParams(qs), {
+                        method: this.apiVersion === 'v1' ? 'POST' : 'POST',
+                        body: request,
+                        credentials: 'include',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                    }).then(res => res.json())
+                        .then((response) => {
+                            if (response.id) {
+                                this.getTasks();
+                                this.$set(this.new_task, 'text', '');
+                            } else {
+                                alert("Произошла ошибка. Посмотрите консоль разработчика чтоб увидеть подробности.")
+                            }
+                        });
+                }
+            },
+            updateTask: function (index, id) {
+                let request = JSON.stringify({ text: this.tasks[index].text, id: id, checked: this.tasks[index].checked });
+                const route = this.apiVersion === 'v1' ? '/items' : '/router';
+                const qs = {action: this.apiVersion === 'v1' ? '' : 'editItem'};
+                fetch(this.apiURL + this.apiVersion + route + this.backendSuffix + '?' + new URLSearchParams(qs), {
+                    method: this.apiVersion === 'v1' ? 'PUT' : 'POST',
+                    body: request,
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                })
+                    .then(res => res.json())
+                    .then(() => {
+                        this.getTasks()
+                    });
+            },
+            markAsDone(index, id) {
+                this.$set(this.tasks[index], 'checked', this.tasks[index].checked === false)
+                this.checked = this.tasks[index].checked;
+                this.updateTask(index, id)
+            },
+            editTask(index) {
+                this.$set(this.tasks[index], 'editable', true);
+                this.$set(this.tasks[index], 'inputedit', this.tasks[index].text);
+            },
+            save(index, id) {
+                if (this.new_task.text !== '' || this.new_task.text !== ' ') {
+                    this.$set(this.tasks[index], 'text', this.tasks[index].inputedit);
+                    this.updateTask(index, id);
+                    this.$set(this.tasks[index], 'editable', false);
+
+                }
+            },
+            disable(index) {
+                this.$set(this.tasks[index], 'editable', false);
+                this.$set(this.tasks[index], 'inputedit', '');
+            },
+            logout() {
+                const route = this.apiVersion === 'v1' ? '/logout' : '/router';
+                const qs = {action: this.apiVersion === 'v1' ? '' : 'logout'};
+                fetch(this.apiURL + this.apiVersion + route, {
+                    method: this.apiVersion === 'v1' ? 'POST' : 'POST',
+                    credentials: 'include',
+                }).then(res => res.json())
+                    .then((response) => {
+                        if (response.ok) {
+                            localStorage.clear();
+                            this.step = 'login';
+                        }
+                    });
+            },
+            logIn() {
+                if (this.login.trim() !== '' && this.pass.trim()) {
+                    let params = JSON.stringify({ login: this.login, pass: this.pass });
+                    const route = this.apiVersion === 'v1' ? '/login' : '/router';
+                    const qs = {action: this.apiVersion === 'v1' ? '' : 'login'};
+                    fetch(this.apiURL + this.apiVersion + route + this.backendSuffix + '?' + new URLSearchParams(qs), {
+                        method: this.apiVersion === 'v1' ? 'POST' : 'POST',
+                        credentials: 'include',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: params
+                    })
+                        .then(res => res.json())
+                        .then(response => {
+                            if (response.ok) {
+                                localStorage.setItem('name', this.login);
+                                this.getTasks();
+                                this.step = 'items';
+                            } else if (response.error === 'not found') {
+                                alert('Такая комбинация логина и пароля не найдена');
+                            } else {
+                                alert("Произошла ошибка. Посмотрите консоль разработчика чтоб увидеть подробности.")
+                            }
+                        })
+                }
+            },
+            register() {
+                if (this.login.trim() !== '' && this.pass.trim()) {
+                    let params = JSON.stringify({ login: this.login, pass: this.pass });
+                    const route = this.apiVersion === 'v1' ? '/register' : '/router';
+                    const qs = {action: this.apiVersion === 'v1' ? '' : 'register'};
+                    fetch(this.apiURL + this.apiVersion + route + this.backendSuffix + '?' + new URLSearchParams(qs), {
+                        method: this.apiVersion === 'v1' ? 'POST' : 'POST',
+                        body: params,
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                    })
+                        .then(res => res.json())
+                        .then((response) => {
+                            if (response.ok) {
+                                this.logIn();
+                            } else {
+                                alert("Произошла ошибка. Посмотрите консоль разработчика чтоб увидеть подробности.")
+                            }
+                        });
+                }
+            },
+        },
+    });
+</script>
+</body>
+</html>

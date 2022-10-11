@@ -1,0 +1,115 @@
+{
+	"users": [
+		{
+			"id": "5524aa4e57fbf87437991f2c4888dd00af288b6d",
+			"login": "test",
+			"pass": "1234",
+			"tasks": [
+				{
+					"text": "Это же всего лишда",
+					"id": "077cbbd7ce22d6c2473e",
+					"checked": true
+				}
+			]
+		},
+		{
+			"id": "d8b0442d648f1f658a84c64fe550c81f7a747748",
+			"login": "bogdan.grishin.2007@gmail.com",
+			"pass": "112233",
+			"tasks": [
+				{
+					"text": "Сьесть пиццу",
+					"id": "3256e45a610c7564a677",
+					"checked": true
+				},
+				{
+					"text": "Выгулять кота",
+					"id": "9e3c6cf350944b56a0fa",
+					"checked": false
+				},
+				{
+					"id": "fdd445116d9d12e8f30c",
+					"text": "Пойти в путишествие",
+					"checked": false
+				},
+				{
+					"text": "Любить java-script",
+					"id": "910b14b58a88421737f3",
+					"checked": true
+				},
+				{
+					"id": "65114fba6609c87b1540",
+					"text": "Поесть",
+					"checked": false
+				},
+				{
+					"text": "Попить",
+					"id": "794b52d23b9661e1156e",
+					"checked": true
+				},
+				{
+					"text": "Почилить",
+					"id": "9b6df8d49ddb6a4cdb61",
+					"checked": true
+				},
+				{
+					"id": "9befbcf43f1a1f92e8c4",
+					"text": "To do 2.5",
+					"checked": false
+				},
+				{
+					"text": "Testing",
+					"id": "ac0e16bbcc0665744b97",
+					"checked": false
+				}
+			]
+		},
+		{
+			"id": "4c7eee4c2acf12098ddeda56773a09b4c5433181",
+			"login": "Пес",
+			"pass": "1",
+			"tasks": []
+		},
+		{
+			"id": "ee3d29d5153fdc69e29717f28ea7142ac43e156b",
+			"login": "roman",
+			"pass": "shpp",
+			"tasks": [
+				{
+					"text": "Сделать лучшее место в мире",
+					"id": "2dd8373cf68703801575",
+					"checked": true
+				}
+			]
+		},
+		{
+			"id": "79c4db0b4ea3e2610be4a3543d8ccf72e080ea70",
+			"login": "Inna",
+			"pass": "555",
+			"tasks": [
+				{
+					"text": "Выгулять мопса)",
+					"id": "2d35ccb89a6a39401b4e",
+					"checked": false
+				}
+			]
+		},
+		{
+			"id": "a689f3dc2de0bba5db714a67b93bcc5fe78a3133",
+			"login": "last test",
+			"pass": "123123",
+			"tasks": [
+				{
+					"id": "eebc8cf6017a1789b7fd",
+					"text": "do finish test",
+					"checked": false
+				},
+				{
+					"id": "a337439991d67939a72e",
+					"text": "finish 2.4",
+					"checked": false
+				}
+			]
+		}
+	]
+}
