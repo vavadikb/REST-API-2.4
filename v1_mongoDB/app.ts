@@ -9,15 +9,14 @@ import routerItems from "./routes/routerItems";
 import routerAuth from "./routes/routerAuth";
 import connectDatabase from "./database/dbConnection";
 
-// import dotenv from 'dotenv'
-// dotenv.config();
+import dotenv from 'dotenv'
+dotenv.config();
 
-const database:string = 'mongodb+srv://vadim:29092006Vb!@cluster0.x4bzusj.mongodb.net/test'
 const app = express()
 
 app.use(session({
     store: MongoStore.create({
-        mongoUrl:database
+        mongoUrl: process.env.DATABASE_URL
     }),
     secret: 'samiyslozhnyparol',
     resave: false,
@@ -42,7 +41,7 @@ app.use(cors({
 
 async function serverStart() {
     try {
-        await connectDatabase(database!).then(() => {
+        await connectDatabase(process.env.DATABASE_UR!).then(() => {
             console.log(`Connected to DB`)
             app.listen(3000, () => {
                 console.log(`Server listening on port: ${port}`)
